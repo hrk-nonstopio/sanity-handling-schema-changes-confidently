@@ -16,7 +16,6 @@ const EVENT_QUERY = defineQuery(`*[
   ...,
   "date": coalesce(date, now()),
   "doorsOpen": coalesce(doorsOpen, 0),
-  "eventType": coalesce(format, eventType),
   headline->,
   venue->
 }`);
@@ -42,7 +41,7 @@ export default async function EventPage({
     headline,
     image,
     details,
-    eventType,
+    format,
     doorsOpen,
     venue,
     tickets,
@@ -71,11 +70,11 @@ export default async function EventPage({
         />
         <div className="flex flex-col justify-center space-y-4">
           <div className="space-y-4">
-            {eventType ? (
+            {format && (
               <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800 capitalize">
-                {eventType.replace("-", " ")}
+                {format.replace("-", " ")}
               </div>
-            ) : null}
+            )}
             {name ? (
               <h1 className="text-4xl font-bold tracking-tighter mb-8">
                 {name}

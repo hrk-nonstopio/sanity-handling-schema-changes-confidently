@@ -35,6 +35,7 @@ export const eventType = defineType({
         reason: 'Use the "Event format" field instead.'
       },
       readOnly: true,
+      hidden: true, // hide from content creators, but keep it in code
       options: {
         list: ['in-person', 'virtual'],
         layout: 'radio',

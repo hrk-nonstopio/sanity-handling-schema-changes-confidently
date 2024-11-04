@@ -77,6 +77,7 @@ export type Event = {
   name?: string;
   slug?: Slug;
   eventType?: "in-person" | "virtual";
+  format?: "in-person" | "virtual";
   date?: string;
   doorsOpen?: number;
   venue?: {
@@ -121,6 +122,44 @@ export type Event = {
     _key: string;
   }>;
   tickets?: string;
+};
+
+export type Venue = {
+  _id: string;
+  _type: "venue";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  city?: string;
+  country?: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type Artist = {
+  _id: string;
+  _type: "artist";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  description?: string;
+  photo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type SanityImageCrop = {
@@ -180,31 +219,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Venue = {
-  _id: string;
-  _type: "venue";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type Artist = {
-  _id: string;
-  _type: "artist";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-};
-
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Event | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Venue | Slug | Artist;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Event | Venue | Slug | Artist | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../frontend-nextjs/src/app/page.tsx
 // Variable: EVENTS_QUERY
@@ -228,6 +243,7 @@ export type EVENT_QUERYResult = {
   name?: string;
   slug?: Slug;
   eventType?: "in-person" | "virtual";
+  format?: "in-person" | "virtual";
   date: string;
   doorsOpen: number | 0;
   venue: {
@@ -237,6 +253,8 @@ export type EVENT_QUERYResult = {
     _updatedAt: string;
     _rev: string;
     name?: string;
+    city?: string;
+    country?: string;
   } | null;
   headline: {
     _id: string;
@@ -245,6 +263,18 @@ export type EVENT_QUERYResult = {
     _updatedAt: string;
     _rev: string;
     name?: string;
+    description?: string;
+    photo?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
   } | null;
   image?: {
     asset?: {
