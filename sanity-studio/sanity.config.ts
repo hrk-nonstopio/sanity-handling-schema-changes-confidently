@@ -7,9 +7,9 @@ import { defaultDocumentNode } from './structure/defaultDocumentNode'
 
 export default defineConfig({
   name: 'default',
-  title: 'Day one with Sanity',
+  title: 'Handling schema changes confidently',
 
-  projectId: 'dl4b6sy6',
+  projectId: 'kui080nn',
   dataset: 'production',
 
   plugins: [
