@@ -49,6 +49,7 @@ export const eventType = defineType({
         list: ['in-person', 'virtual'],
         layout: 'radio',
       },
+      validation: (rule) => rule.required(),
       group: 'details',
     }),
     defineField({
